@@ -4,6 +4,7 @@ public class HangmanDemo{
    public static void main(String[] args){
       char c;
       String temp;
+      int MaxGuessingNum = 7;
       Scanner in = new Scanner(System.in);
       String[] movies = {"stars wars", "the hunger games", "the avengers", "gone with the wind","she","black is the new orange","fighting","my way"}; 
       Random rand = new Random();
@@ -14,20 +15,20 @@ public class HangmanDemo{
        
       System.out.println("Welcome to the Guessing Game. The topic is movie titles.");
       System.out.println();
-      System.out.println("You have 6 guesses. Your puzzle has the following letters: ");
+      System.out.println("You have " + MaxGuessingNum-1 + " guesses. Your puzzle has the following letters: ");
       System.out.println();
       System.out.println(h1.getDisguisedPhrase());
        
             //boolean flag == false;
-         while(h1.getIncorrectCount()<7){
+         while(h1.getIncorrectCount()<MaxGuessingNum){
             System.out.println("Please guess a letter: ");
             temp = in.nextLine();
             c =temp.charAt(0);
-               if(h1.checkRepeat(c) == true){
+               if(h1.checkRepeat(c)){
                   System.out.print("Too bad -you already guessed "+c);  
                }
                else{  int cnt = 0;
-                  if(h1.makeGuesses(c)== true){
+                  if(h1.makeGuesses(c)){
                      cnt++;
                      System.out.println(h1.getDisguisedPhrase()+"\nThere are "+cnt+c+".");
                    }
@@ -40,8 +41,9 @@ public class HangmanDemo{
                      System.out.println("No "+c+"."+"You have "+(7-h1.getIncorrectCount())+" guesses left.");
                }
           }
-               if(h1.getIncorrectCount() == 7)
+               if(h1.getIncorrectCount() == MaxGuessingNum){
                   System.out.println("Sorry you lose...");
+               }
    }
 }
 
